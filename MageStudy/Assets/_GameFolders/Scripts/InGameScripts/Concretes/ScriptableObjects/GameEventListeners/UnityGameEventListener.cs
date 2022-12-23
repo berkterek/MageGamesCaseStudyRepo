@@ -2,7 +2,7 @@ using MageStudy.Abstracts.GameEventListeners;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Panteon2DStrategy.ScriptableObjects.GameEventListeners
+namespace MageStudy.ScriptableObjects.GameEventListeners
 {
     public class UnityGameEventListener : BaseGameEventListener
     {

@@ -14,5 +14,10 @@ namespace MageStudy.Managers
 
             _backendDal = new ApiCallBackendDal();
         }
+
+        void Start()
+        {
+            _backendDal.GetLeaderboardPageAsync(0);
+        }
     }
 }

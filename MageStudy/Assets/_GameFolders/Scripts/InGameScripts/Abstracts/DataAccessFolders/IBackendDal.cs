@@ -1,7 +1,11 @@
+using System.Threading.Tasks;
+using MageStudy.DataEntities;
+
 namespace MageStudy.Abstracts.DataAccessFolders
 {
     public interface IBackendDal
     {
-        void GetLeaderboardPage(int pageCount);
+        public int PageLength { get; }
+        Task<LeaderboardEntityData> GetLeaderboardPageAsync(int pageCount);
     }
 }

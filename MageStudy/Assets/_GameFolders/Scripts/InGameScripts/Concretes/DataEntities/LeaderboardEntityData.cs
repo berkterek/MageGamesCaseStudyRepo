@@ -6,6 +6,6 @@ namespace MageStudy.DataEntities
     {
         public int Page { get; set; }
         public bool IsLast { get; set; }
-        public List<LeaderboardEntityData> Data { get; set; }
+        public List<LeaderboardPlayerEntityData> Data { get; set; }
     }
 }

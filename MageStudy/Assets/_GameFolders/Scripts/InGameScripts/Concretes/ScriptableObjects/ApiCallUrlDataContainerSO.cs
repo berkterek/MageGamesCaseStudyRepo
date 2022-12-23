@@ -7,6 +7,8 @@ namespace MageStudy.ScriptableObjects
     {
         [SerializeField] string[] _apiUrls;
 
+        public int PageLength => _apiUrls.Length;
+
         public string GetUrlByIndex(int index)
         {
             try
