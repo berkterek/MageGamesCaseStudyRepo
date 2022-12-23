@@ -12,6 +12,8 @@ namespace MageStudy.Managers
     {
         IBackendDal _backendDal;
 
+        public int PageMaxCount => _backendDal.PageLength;
+
         void Awake()
         {
             SetSingleton(this);
