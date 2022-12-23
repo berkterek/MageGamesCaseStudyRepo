@@ -1,13 +1,17 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using MageStudy.Abstracts.DataAccessFolders;
 using MageStudy.Abstracts.Helpers;
 using MageStudy.DataAccessFolders;
+using MageStudy.DataEntities;
 
 namespace MageStudy.Managers
 {
     public class BackendManager : MonoSingletonDontDestroy<BackendManager>
     {
         IBackendDal _backendDal;
-        
+
         void Awake()
         {
             SetSingleton(this);
@@ -15,9 +19,10 @@ namespace MageStudy.Managers
             _backendDal = new ApiCallBackendDal();
         }
 
-        void Start()
+        public async Task<List<LeaderboardPlayerEntityData>> GetLeaderboardByPageCountAsync(int page)
         {
-            _backendDal.GetLeaderboardPageAsync(0);
+             var apiResult = await _backendDal.GetLeaderboardPageAsync(page);
+             return apiResult.Data.ToList();
         }
     }
 }

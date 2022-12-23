@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using MageStudy.Abstracts.DataAccessFolders;
 using MageStudy.DataEntities;
@@ -37,9 +38,15 @@ namespace MageStudy.DataAccessFolders
                 {
                     webRequest.SendWebRequest();
 
+                    CancellationTokenSource token = new CancellationTokenSource();
                     while (!webRequest.isDone)
                     {
-                        await Task.Yield();
+                        if (token.IsCancellationRequested)
+                        {
+                            break;
+                        }
+                        
+                        Task.Yield();    
                     }
 
                     if (UnityWebRequest.Result.Success == webRequest.result)
