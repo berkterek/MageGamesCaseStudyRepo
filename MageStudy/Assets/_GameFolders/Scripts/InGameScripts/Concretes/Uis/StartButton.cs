@@ -1,5 +1,4 @@
 ﻿using MageStudy.Abstracts.Uis;
-using UnityEngine;
 
 namespace MageStudy.Uis
 {
@@ -7,7 +6,6 @@ namespace MageStudy.Uis
     {
         protected override void HandleOnButtonClicked()
         {
-            Debug.Log("Start Button Triggered");
         }
     }
 }
