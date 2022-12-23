@@ -1,4 +1,6 @@
-using System.Threading.Tasks;
+using MageStudy.Abstracts.DataAccessFolders;
+using MageStudy.DataAccessFolders;
+using MageStudy.Enums;
 using UnityEngine;
 
 namespace MageStudy.Managers
@@ -47,28 +49,5 @@ namespace MageStudy.Managers
             var result = _unityObjectDal.GetObjectAsync<TScriptableObject>(path);
             return result;
         }
-    }
-
-    public interface IUnityObjectDal
-    {
-         T GetObjectAsync<T>(string path) where T : Object;
-    }
-
-    public class ResourcesObjectDal : IUnityObjectDal
-    {
-        public T GetObjectAsync<T>(string path) where T : Object
-        {
-            var operation = Resources.LoadAsync<T>(path);
-            Task.Yield().GetAwaiter();
-
-            var result = operation.asset as T;
-            return result;
-        }
-    }
-
-    public enum UnityCreateType : byte
-    {
-        Resources,
-        Addressables
     }
 }
