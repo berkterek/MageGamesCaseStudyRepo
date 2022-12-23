@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace MageStudy.Uis
 {
-    public class LeaderboardOpenButton : BaseButton
+    public class CloseButton : BaseButton
     {
-        [SerializeField] GameEvent _leaderboardOpenEvent;
-        
+        [SerializeField] GameEvent _closeEvent;
+
         protected override void HandleOnButtonClicked()
         {
-            _leaderboardOpenEvent.InvokeEvents();
+            _closeEvent.InvokeEvents();
         }
     }    
 }
