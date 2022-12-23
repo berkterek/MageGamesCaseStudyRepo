@@ -1,4 +1,5 @@
 ﻿using MageStudy.Abstracts.Uis;
+using MageStudy.Managers;
 
 namespace MageStudy.Uis
 {
@@ -6,6 +7,9 @@ namespace MageStudy.Uis
     {
         protected override void HandleOnButtonClicked()
         {
+            if (GameManager.Instance == null) return;
+            
+            GameManager.Instance.LoadGameScene();
         }
     }
 }

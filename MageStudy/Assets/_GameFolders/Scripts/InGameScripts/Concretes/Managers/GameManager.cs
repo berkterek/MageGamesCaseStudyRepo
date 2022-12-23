@@ -10,5 +10,10 @@ namespace MageStudy.Managers
             SetSingleton(this);
             Application.targetFrameRate = 60;
         }
+
+        public void LoadGameScene()
+        {
+            
+        }
     }    
 }
