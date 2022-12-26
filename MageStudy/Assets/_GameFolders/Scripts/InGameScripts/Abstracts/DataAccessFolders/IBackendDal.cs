@@ -7,5 +7,6 @@ namespace MageStudy.Abstracts.DataAccessFolders
     {
         public int PageLength { get; }
         Task<LeaderboardEntityData> GetLeaderboardPageAsync(int pageCount);
+        Task<QuestionsEntityData> GetQuestions();
     }
 }

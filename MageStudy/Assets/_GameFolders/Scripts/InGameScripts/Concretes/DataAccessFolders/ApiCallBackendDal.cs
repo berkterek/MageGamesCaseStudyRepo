@@ -11,23 +11,42 @@ using UnityEngine.Networking;
 
 namespace MageStudy.DataAccessFolders
 {
-    public class ApiCallBackendDal : IBackendDal
+    public partial class ApiCallBackendDal : IBackendDal
     {
-        readonly ApiCallUrlDataContainerSO _apiCallUrlDataContainer;
+        readonly ApiCallUrlDataContainerSO _leaderboardUrlDataContainer;
+        readonly ApiCallUrlDataContainerSO _questionUrlDataContainer;
 
-        public int PageLength => _apiCallUrlDataContainer.PageLength;
+        public int PageLength => _leaderboardUrlDataContainer.PageLength;
 
         public ApiCallBackendDal()
         {
             var unityObjectManager = UnityObjectManager.CreateSingleton(UnityCreateType.Resources);
-            _apiCallUrlDataContainer =
+            
+            _leaderboardUrlDataContainer =
                 unityObjectManager.GetScriptableObject<ApiCallUrlDataContainerSO>(
                     "DataContainers/LeaderboardUrlDataContainer");
+
+            _questionUrlDataContainer =
+                unityObjectManager.GetScriptableObject<ApiCallUrlDataContainerSO>(
+                    "DataContainers/QuestionsUrlDataContainer");
         }
 
         public async Task<LeaderboardEntityData> GetLeaderboardPageAsync(int pageCount)
         {
-            string url = _apiCallUrlDataContainer.GetUrlByIndex(pageCount);
+            var result = await GetGenericApiCall<LeaderboardEntityData>(_leaderboardUrlDataContainer, pageCount);
+            return result;
+        }
+
+        public async Task<QuestionsEntityData> GetQuestions()
+        {
+            var result = await GetGenericApiCall<QuestionsEntityData>(_questionUrlDataContainer);
+            return result;
+
+        }
+
+        private async Task<T> GetGenericApiCall<T>(ApiCallUrlDataContainerSO dataContainerSo, int index = 0)
+        {
+            string url = dataContainerSo.GetUrlByIndex(index);
 
             if (string.IsNullOrEmpty(url))
             {
@@ -55,8 +74,7 @@ namespace MageStudy.DataAccessFolders
                         try
                         {
                             string getResult = webRequest.downloadHandler.text;
-                            LeaderboardEntityData apiResult = JsonConvert.DeserializeObject<LeaderboardEntityData>(getResult);
-                            Debug.Log($"Api call result count => <color=red>{apiResult.Data.Count}</color>");
+                            var apiResult = JsonConvert.DeserializeObject<T>(getResult);
                             return apiResult;
                         }
                         catch
@@ -67,7 +85,7 @@ namespace MageStudy.DataAccessFolders
                 }
             }
 
-            return null;
+            return default;
         }
     }
 }

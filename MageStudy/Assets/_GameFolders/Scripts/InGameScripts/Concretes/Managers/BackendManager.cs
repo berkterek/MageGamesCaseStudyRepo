@@ -26,5 +26,11 @@ namespace MageStudy.Managers
              var apiResult = await _backendDal.GetLeaderboardPageAsync(page);
              return apiResult.Data.ToList();
         }
+
+        public async Task<List<QuestionEntity>> GetQuestions()
+        {
+            var apiResult = await _backendDal.GetQuestions();
+            return apiResult.Questions.ToList();
+        }
     }
 }
