@@ -1,15 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4062970095004606799
+--- !u!1001 &6900970183544831414
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 403634856807302526, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_text
+      value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 403634856807302526, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_fontSize
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 403634856807302526, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+    - target: {fileID: 403634856807302526, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 403634856807302526, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+    - target: {fileID: 403634857202939639, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300014, guid: 34ecf51bcd3f4424eafda7dafd885bd0, type: 3}
+    - target: {fileID: 403634857202939639, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_Color.b
+      value: 0.35077387
+      objectReference: {fileID: 0}
+    - target: {fileID: 403634857202939639, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_Color.g
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 403634857202939639, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+      propertyPath: m_Color.r
+      value: 0.2741189
+      objectReference: {fileID: 0}
     - target: {fileID: 403634857456662954, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
       propertyPath: m_Name
-      value: BaseButton
+      value: StartButton
       objectReference: {fileID: 0}
     - target: {fileID: 403634857456662955, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
       propertyPath: m_Pivot.x
@@ -97,3 +133,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+--- !u!114 &6511312335085962266 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 403634857456662956, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+  m_PrefabInstance: {fileID: 6900970183544831414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511312335085962268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6511312335085962268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 403634857456662954, guid: 82ac43066b6c54e45b9b8874b7e2b4ed, type: 3}
+  m_PrefabInstance: {fileID: 6900970183544831414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7755477371784523939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511312335085962268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17072d8e3404437abf565fa241fee88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6511312335085962266}

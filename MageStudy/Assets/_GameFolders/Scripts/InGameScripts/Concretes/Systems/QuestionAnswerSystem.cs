@@ -13,6 +13,7 @@ namespace MageStudy.Systems
 {
     public class QuestionAnswerSystem : MonoBehaviour
     {
+        [SerializeField] GameEvent _endGameEvent;
         [SerializeField] GameRuleDataContainerSO _gameRuleDataContainer;
         [SerializeField] AnswerColorDataContainerSO _colorDataContainer;
         [SerializeField] AnswerSlotManager _answerSlotManager;
@@ -134,6 +135,8 @@ namespace MageStudy.Systems
             {
                 _blocker.enabled = true;
                 _isTimeEnd = true;
+                GameManager.Instance.GameEnded(_playerScore);
+                _endGameEvent.InvokeEvents();
             }
             else
             {

@@ -5,6 +5,8 @@ namespace MageStudy.Managers
 {
     public class GameManager : MonoSingletonDontDestroy<GameManager>
     {
+        public event System.Action<int> OnGameEnded;
+        
         void Awake()
         {
             SetSingleton(this);
@@ -14,6 +16,16 @@ namespace MageStudy.Managers
         public void LoadGameScene()
         {
             
+        }
+
+        public void LoadMenuScene()
+        {
+            
+        }
+
+        public void GameEnded(int score)
+        {
+            OnGameEnded?.Invoke(score);
         }
     }    
 }
