@@ -14,8 +14,12 @@ namespace MageStudy.ScriptableObjects
         [Range(-50,-1)]
         [SerializeField] int _timesEndPoint = -1;
 
+        [Range(5f,100f)]
+        [SerializeField] float _maxOneQuestionTime = 20f;
+
         public int CorrectAnswerPoint => _correctAnswerPoint;
         public int WrongAnswerPoint => _wrongAnswerPoint;
         public int TimesEndPoint => _timesEndPoint;
+        public float MaxOneQuestionTime => _maxOneQuestionTime;
     }
 }
