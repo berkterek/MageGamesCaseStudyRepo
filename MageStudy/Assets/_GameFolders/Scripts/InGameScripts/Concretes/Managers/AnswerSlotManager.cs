@@ -28,6 +28,16 @@ namespace MageStudy.Controllers
         void HandleOnAnswerButtonClicked(bool value)
         {
             Debug.Log($"Answer is {value}");
+
+            if (!value)
+            {
+                foreach (IAnswerSlotController slot in _slots)
+                {
+                    if(!slot.IsCorrectAnswer) continue;
+                    
+                    slot.ShowCorrectAnswer();
+                }
+            }
         }
 
         public void Bind(AnswerSlotModel[] models)

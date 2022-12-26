@@ -13,6 +13,8 @@ namespace MageStudy.Controllers
         [SerializeField] Image _answerImage;
         [SerializeField] bool _isCorrectAnswer;
 
+        public bool IsCorrectAnswer => _isCorrectAnswer;
+
         public event System.Action<bool> OnAnswerButtonClicked;
 
         protected override void OnValidate()
@@ -33,8 +35,13 @@ namespace MageStudy.Controllers
         
         protected override void HandleOnButtonClicked()
         {
-            _answerImage.enabled = true;
+            ShowCorrectAnswer();
             OnAnswerButtonClicked?.Invoke(_isCorrectAnswer);
+        }
+
+        public void ShowCorrectAnswer()
+        {
+            _answerImage.enabled = true;
         }
     }
     
