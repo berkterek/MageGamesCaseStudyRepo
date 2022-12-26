@@ -1,3 +1,4 @@
+using MageStudy.Abstracts.Controllers;
 using UnityEngine;
 
 namespace MageStudy.Controllers

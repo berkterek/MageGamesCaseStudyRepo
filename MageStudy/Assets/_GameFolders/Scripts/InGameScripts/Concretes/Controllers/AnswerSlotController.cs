@@ -1,3 +1,4 @@
+using MageStudy.Abstracts.Controllers;
 using MageStudy.Abstracts.Uis;
 using TMPro;
 using UnityEngine;
@@ -42,11 +43,5 @@ namespace MageStudy.Controllers
         public string Choice { get; set; }
         public Color AnswerColor { get; set; }
         public bool IsCorrectAnswer { get; set; }
-    }
-
-    public interface IAnswerSlotController
-    {
-        void Bind(AnswerSlotModel model);
-        event System.Action<bool> OnAnswerButtonClicked;
     }
 }
