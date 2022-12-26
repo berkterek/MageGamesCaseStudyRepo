@@ -7,6 +7,8 @@ namespace MageStudy.Controllers
     {
         [SerializeField] AnswerSlotController[] _slots;
 
+        public event System.Action<bool> OnAnswerSelected;
+
         void OnValidate() => _slots ??= GetComponentsInChildren<AnswerSlotController>();
 
         void OnEnable()
@@ -24,19 +26,26 @@ namespace MageStudy.Controllers
                 answerSlotController.OnAnswerButtonClicked -= HandleOnAnswerButtonClicked;
             }
         }
-        
+
         void HandleOnAnswerButtonClicked(bool value)
         {
             Debug.Log($"Answer is {value}");
 
             if (!value)
             {
-                foreach (IAnswerSlotController slot in _slots)
-                {
-                    if(!slot.IsCorrectAnswer) continue;
-                    
-                    slot.ShowCorrectAnswer();
-                }
+                ShowCorrectAnswer();
+            }
+
+            OnAnswerSelected?.Invoke(value);
+        }
+
+        public void ShowCorrectAnswer()
+        {
+            foreach (IAnswerSlotController slot in _slots)
+            {
+                if (!slot.IsCorrectAnswer) continue;
+
+                slot.ShowCorrectAnswer();
             }
         }
 
@@ -47,6 +56,5 @@ namespace MageStudy.Controllers
                 _slots[i].Bind(models[i]);
             }
         }
-    }    
+    }
 }
-

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using MageStudy.Controllers;
 using MageStudy.DataEntities;
@@ -6,6 +7,7 @@ using MageStudy.Helpers;
 using MageStudy.Managers;
 using MageStudy.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MageStudy.Systems
 {
@@ -15,13 +17,17 @@ namespace MageStudy.Systems
         [SerializeField] AnswerColorDataContainerSO _colorDataContainer;
         [SerializeField] AnswerSlotManager _answerSlotManager;
         [SerializeField] QuestionPresentationController _questionPresentationController;
+        [SerializeField] Image _blocker;
         [SerializeField] int _maxQuestionCount;
+        [SerializeField] int _playerScore = 0;
         
         List<QuestionEntity> _questions;
         int _currentQuestionCount = 0;
         float _currentTime = 0f;
+        bool _isTimeEnd = false;
 
         public event System.Action<float> OnTimeChanged;
+        public event System.Action<int> OnPlayerScoreChanged;
 
         async void Start()
         {
@@ -29,6 +35,44 @@ namespace MageStudy.Systems
             _maxQuestionCount = _questions.Count;
             _currentQuestionCount = 0;
 
+            ShowQuestion();
+        }
+
+        void OnEnable()
+        {
+            _answerSlotManager.OnAnswerSelected += HandleOnAnswerSelected;
+        }
+
+        void OnDisable()
+        {
+            _answerSlotManager.OnAnswerSelected -= HandleOnAnswerSelected;
+        }
+
+        void OnValidate()
+        {
+            this.GetReferenceInChildren<AnswerSlotManager>(ref _answerSlotManager);
+            this.GetReferenceInChildren<QuestionPresentationController>(ref _questionPresentationController);
+        }
+        
+        void Update()
+        {
+            if (_isTimeEnd) return;
+            
+            _currentTime += Time.deltaTime;
+
+            if (_currentTime > _gameRuleDataContainer.MaxOneQuestionTime)
+            {
+                _isTimeEnd = true;
+                _currentTime = 0f;
+                _answerSlotManager.ShowCorrectAnswer();
+                HandleOnAnswerSelected(false);
+            }
+            
+            OnTimeChanged?.Invoke(_currentTime);
+        }
+
+        private void ShowQuestion()
+        {
             var currentQuestion = _questions[_currentQuestionCount];
 
             AnswerSlotModel[] models = new AnswerSlotModel[4];
@@ -53,22 +97,50 @@ namespace MageStudy.Systems
             });
         }
         
-        void OnValidate()
+        void HandleOnAnswerSelected(bool value)
         {
-            this.GetReferenceInChildren<AnswerSlotManager>(ref _answerSlotManager);
-            this.GetReferenceInChildren<QuestionPresentationController>(ref _questionPresentationController);
-        }
-        
-        void Update()
-        {
-            _currentTime += Time.deltaTime;
-
-            if (_currentTime > _gameRuleDataContainer.MaxOneQuestionTime)
+            _blocker.enabled = true;
+            
+            if (value)
             {
-                _currentTime = 0f;
+                _playerScore += _gameRuleDataContainer.CorrectAnswerPoint;
+            }
+            else
+            {
+                if (_isTimeEnd)
+                {
+                    _playerScore += _gameRuleDataContainer.TimesEndPoint;
+                }
+                else
+                {
+                    _playerScore += _gameRuleDataContainer.WrongAnswerPoint;
+                }
             }
             
-            OnTimeChanged?.Invoke(_currentTime);
+            OnPlayerScoreChanged?.Invoke(_playerScore);
+
+            StartCoroutine(NextQuestionAsync());
+        }
+
+        IEnumerator NextQuestionAsync()
+        {
+            _isTimeEnd = true;
+            _currentTime = 0f;
+            _currentQuestionCount++;
+            
+            yield return new WaitForSeconds(3f);
+
+            if (_currentQuestionCount >= _maxQuestionCount)
+            {
+                _blocker.enabled = true;
+                _isTimeEnd = true;
+            }
+            else
+            {
+                _blocker.enabled = false;
+                _isTimeEnd = false;             
+                ShowQuestion();
+            }
         }
     }
 }

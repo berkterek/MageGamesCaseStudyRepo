@@ -22,7 +22,7 @@ namespace MageStudy.Controllers
 
         void OnDisable()
         {
-            
+            _system.OnTimeChanged -= HandleOnTimeChanged;
         }
         
         void HandleOnTimeChanged(float value)
