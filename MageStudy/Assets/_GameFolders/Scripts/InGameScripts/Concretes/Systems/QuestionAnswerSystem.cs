@@ -11,6 +11,7 @@ namespace MageStudy.Systems
 {
     public class QuestionAnswerSystem : MonoBehaviour
     {
+        [SerializeField] GameRuleDataContainerSO _gameRuleDataContainer;
         [SerializeField] AnswerColorDataContainerSO _colorDataContainer;
         [SerializeField] AnswerSlotManager _answerSlotManager;
         [SerializeField] QuestionPresentationController _questionPresentationController;
@@ -18,6 +19,9 @@ namespace MageStudy.Systems
         
         List<QuestionEntity> _questions;
         int _currentQuestionCount = 0;
+        float _currentTime = 0f;
+
+        public event System.Action<float> OnTimeChanged;
 
         async void Start()
         {
@@ -48,11 +52,23 @@ namespace MageStudy.Systems
                 Category = currentQuestion.Category
             });
         }
-
+        
         void OnValidate()
         {
             this.GetReferenceInChildren<AnswerSlotManager>(ref _answerSlotManager);
             this.GetReferenceInChildren<QuestionPresentationController>(ref _questionPresentationController);
+        }
+        
+        void Update()
+        {
+            _currentTime += Time.deltaTime;
+
+            if (_currentTime > _gameRuleDataContainer.MaxOneQuestionTime)
+            {
+                _currentTime = 0f;
+            }
+            
+            OnTimeChanged?.Invoke(_currentTime);
         }
     }
 }

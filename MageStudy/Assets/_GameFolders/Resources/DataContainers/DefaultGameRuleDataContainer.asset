@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b4b7e73ce188345a7de4240385e495, type: 3}
   m_Name: DefaultGameRuleDataContainer
   m_EditorClassIdentifier: 
-  _correctAnswerPoint: 1
-  _wrongAnswerPoint: -1
-  _timesEndPoint: -1
+  _correctAnswerPoint: 10
+  _wrongAnswerPoint: -5
+  _timesEndPoint: -3
+  _maxOneQuestionTime: 20
