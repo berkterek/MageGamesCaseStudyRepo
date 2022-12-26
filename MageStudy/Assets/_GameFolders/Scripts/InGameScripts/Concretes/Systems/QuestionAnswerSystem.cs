@@ -11,8 +11,9 @@ namespace MageStudy.Systems
 {
     public class QuestionAnswerSystem : MonoBehaviour
     {
-        [SerializeField] AnswerSlotManager _answerSlotManager;
         [SerializeField] AnswerColorDataContainerSO _colorDataContainer;
+        [SerializeField] AnswerSlotManager _answerSlotManager;
+        [SerializeField] QuestionPresentationController _questionPresentationController;
         [SerializeField] int _maxQuestionCount;
         
         List<QuestionEntity> _questions;
@@ -40,11 +41,18 @@ namespace MageStudy.Systems
             }
             
             _answerSlotManager.Bind(models);
+            
+            _questionPresentationController.Bind(new QuestionPresentationModel
+            {
+                Question = currentQuestion.Question,
+                Category = currentQuestion.Category
+            });
         }
 
         void OnValidate()
         {
             this.GetReferenceInChildren<AnswerSlotManager>(ref _answerSlotManager);
+            this.GetReferenceInChildren<QuestionPresentationController>(ref _questionPresentationController);
         }
     }
 }
