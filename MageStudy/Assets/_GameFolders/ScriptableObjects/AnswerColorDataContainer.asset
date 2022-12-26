@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8660d967e4e514abc1b36e6c848d04, type: 3}
+  m_Name: AnswerColorDataContainer
+  m_EditorClassIdentifier: 
+  _answerColorInspectors:
+  - _colorType: 0
+    _color: {r: 0.114542544, g: 0.735849, b: 0.14687125, a: 0.6509804}
+  - _colorType: 1
+    _color: {r: 0.7372549, g: 0.15821984, b: 0.1137255, a: 0.6509804}
